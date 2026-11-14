@@ -10,38 +10,38 @@ gsap.registerPlugin(ScrollTrigger);
 const TESTIMONIALS_DATA = [
   {
     quote: "KidzStar has been a second home for our daughter. The teachers are incredibly nurturing, and the play-based learning style helped her build immense confidence.",
-    clientName: "Sarah Jenkins",
-    clientRole: "Mother of Emily (Playgroup)",
+    clientName: "Pooja Sharma",
+    clientRole: "Mother of Ananya (Playgroup)",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150"
   },
   {
     quote: "We love the focus on safety, hygiene, and creative development. Our son runs to school every morning and comes home bubbling with excitement about his new friends.",
-    clientName: "Michael Chen",
-    clientRole: "Father of Leo (Nursery)",
+    clientName: "Rahul Mehta",
+    clientRole: "Father of Aarav (Nursery)",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150"
   },
   {
     quote: "The language and phonics activities did wonders for our daughter's reading readiness. The storytelling circle is her absolute favorite part of the day!",
-    clientName: "Rayna Madsen",
-    clientRole: "Mother of Sofia (Junior KG)",
+    clientName: "Sneha Patel",
+    clientRole: "Mother of Riya (Junior KG)",
     avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
   },
   {
     quote: "Finding a preschool that truly balances physical activity with emotional development is rare. The team here is incredibly warm and highly professional.",
-    clientName: "Wilson Arcand",
-    clientRole: "Father of Lucas (Senior KG)",
+    clientName: "Amit Deshmukh",
+    clientRole: "Father of Vihaan (Senior KG)",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150"
   },
   {
     quote: "The interactive play areas are clean, colorful, and extremely safe. We appreciate the daily updates and close collaboration between teachers and parents.",
-    clientName: "David Vance",
-    clientRole: "Father of Chloe (Toddler Care)",
+    clientName: "Vikram Malhotra",
+    clientRole: "Father of Ishaan (Toddler Care)",
     avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150&h=150"
   },
   {
     quote: "An outstanding preschool that fosters independent thinking and social skills. Our child has developed beautiful habits and a genuine love for learning.",
-    clientName: "Melissa Duarte",
-    clientRole: "Mother of Mateo (Nursery)",
+    clientName: "Priya Kulkarni",
+    clientRole: "Mother of Advait (Nursery)",
     avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=150&h=150"
   }
 ];
