@@ -9,7 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useAdmissionModal } from "../context/AdmissionModalContext";
 
 export default function Hero() {
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(() =>
+    typeof window !== "undefined" && window.scrollY > 5
+  );
   const containerRef = useRef(null);
   const cardRef = useRef(null);
   const overlayTextRef = useRef(null);
@@ -17,22 +19,18 @@ export default function Hero() {
   const { openModal } = useAdmissionModal();
 
   useEffect(() => {
+    // If already scrolled on mount, state was set via lazy initializer above.
+    // Only add the listener when we still need to detect the first scroll.
+    if (hasScrolled) return;
     const handleScroll = () => {
       if (window.scrollY > 5) {
         setHasScrolled(true);
         window.removeEventListener("scroll", handleScroll);
       }
     };
-
-    // Detect if page loaded with scroll offset
-    if (window.scrollY > 5) {
-      setHasScrolled(true);
-    } else {
-      window.addEventListener("scroll", handleScroll, { passive: true });
-    }
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [hasScrolled]);
 
   const contentRef = useRef(null);
 

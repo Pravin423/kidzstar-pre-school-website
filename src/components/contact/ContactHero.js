@@ -48,7 +48,7 @@ export default function ContactHero() {
           <div className={styles.headerLeft}>
             <span className={`${styles.tag} hero-fade-item`}>CONTACT</span>
             <h1 className={`${styles.title} hero-fade-item`}>
-              Let's turn curiosity into<br />a bright future
+              Let&apos;s turn curiosity into<br />a bright future
             </h1>
           </div>
           

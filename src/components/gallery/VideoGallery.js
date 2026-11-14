@@ -1,6 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
+
+// Subscribe/snapshot helpers for client-mount detection
+function subscribe(cb) { cb(); return () => {}; }
+function getServerSnapshot() { return false; }
 import { createPortal } from "react-dom";
 import { Play, X, Volume2, VolumeX, Maximize2, RefreshCw } from "lucide-react";
 import styles from "./VideoGallery.module.css";
@@ -88,12 +92,12 @@ function VideoCard({ video, onOpen, index }) {
 function LightboxPlayer({ video, onClose }) {
   const videoRef = useRef(null);
   const [muted, setMuted] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+  // Use useSyncExternalStore to detect client-side mount without setState in effect
+  const mounted = useSyncExternalStore(
+    subscribe,
+    () => true,
+    getServerSnapshot
+  );
 
   // Auto-play when opened
   useEffect(() => {
@@ -190,26 +194,28 @@ export default function VideoGallery() {
   const [activeVideo, setActiveVideo] = useState(null);
   const sectionRef = useRef(null);
 
-  const fetchVideos = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/media?type=video");
-      const data = await res.json();
-      if (data.success && data.data.length > 0) {
-        setVideos(data.data);
-      } else {
-        setVideos(FALLBACK_VIDEOS);
-      }
-    } catch {
-      setVideos(FALLBACK_VIDEOS);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchVideos();
-  }, [fetchVideos]);
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      try {
+        const res = await fetch("/api/media?type=video");
+        const data = await res.json();
+        if (!cancelled) {
+          if (data.success && data.data.length > 0) {
+            setVideos(data.data);
+          } else {
+            setVideos(FALLBACK_VIDEOS);
+          }
+        }
+      } catch {
+        if (!cancelled) setVideos(FALLBACK_VIDEOS);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   return (
     <>

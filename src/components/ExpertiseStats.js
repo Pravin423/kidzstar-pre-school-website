@@ -91,7 +91,7 @@ export default function ExpertiseStats() {
                 </div>
               </div>
               <p className="text-[1rem] text-neutral-500 leading-relaxed font-sans font-medium max-w-md md:mt-6 text-left">
-                Parents trust us for our safe, stimulating, and nurturing environment. We focus on active partnership by sharing your child's daily wonder and growth milestones.
+                Parents trust us for our safe, stimulating, and nurturing environment. We focus on active partnership by sharing your child&apos;s daily wonder and growth milestones.
               </p>
             </div>
 

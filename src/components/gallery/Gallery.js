@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import styles from "./Gallery.module.css";
@@ -21,22 +21,21 @@ export default function Gallery() {
   const containerRef = useRef(null);
   const tlRef = useRef(null);
 
-  // Fetch images from DB, fallback to static if none
-  const fetchImages = useCallback(async () => {
-    try {
-      const res = await fetch("/api/media?type=image");
-      const data = await res.json();
-      if (data.success && data.data.length > 0) {
-        setGalleryItems(data.data);
-      }
-    } catch {
-      // keep fallback items
-    }
-  }, []);
-
   useEffect(() => {
-    fetchImages();
-  }, [fetchImages]);
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/media?type=image");
+        const data = await res.json();
+        if (!cancelled && data.success && data.data.length > 0) {
+          setGalleryItems(data.data);
+        }
+      } catch {
+        // keep fallback items
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   // Triplicate for seamless infinite scroll
   const displayItems = [...galleryItems, ...galleryItems, ...galleryItems];
