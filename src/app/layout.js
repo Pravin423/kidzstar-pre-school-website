@@ -14,6 +14,13 @@ export const metadata = {
   title: "KidzStar Preschool | Where Little Stars Shine Brighter",
   description: "Welcome to KidzStar Preschool. Explore our programs, exceptional teaching staff, playful learning spaces, and step-by-step admission process.",
   keywords: ["preschool", "kindergarten", "early childhood education", "daycare", "child development"],
+  icons: {
+    icon: [
+      { url: "/icon.png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
